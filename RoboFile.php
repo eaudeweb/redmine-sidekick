@@ -17,7 +17,7 @@ class RoboFile extends Tasks
    */
   private function createClient(): NativeCurlClient {
     $url = getenv('REDMINE_URL') ?: 'https://test.helpdesk.eaudeweb.ro';
-    $apikey = getenv('REDMINE_APIKEY') ?: file_get_contents('redmine.key');
+    $apikey = getenv('REDMINE_APIKEY') ?: trim(file_get_contents('redmine.key'));
     if(empty($url) || empty($apikey))
       throw new \Exception('Invalid client configuration. Missing Redmine URL or API key');
     $this->say('Using Redmine: ' . $url);
