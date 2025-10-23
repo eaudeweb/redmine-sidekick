@@ -1,0 +1,6 @@
+project_id: php
+tracker_id: 5 # Feature(2), Task(5), Contract(11)
+subject: Test issue
+description: |
+  Test issue created via Project Management Redmine API tool.
+parent_issue_id: 0

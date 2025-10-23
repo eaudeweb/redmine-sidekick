@@ -1,0 +1,42 @@
+<?php
+
+require_once "vendor/autoload.php";
+
+use Eaudeweb\RedmineAPI;
+use Redmine\Client\NativeCurlClient;
+use Robo\Tasks;
+
+/**
+ * @noinspection PhpUnused
+ */
+class RoboFile extends Tasks
+{
+
+  /**
+   * @throws \Exception
+   */
+  private function createClient(): NativeCurlClient {
+    $url = getenv('REDMINE_URL') ?: 'https://test.helpdesk.eaudeweb.ro';
+    $apikey = getenv('REDMINE_APIKEY') ?: file_get_contents('redmine.key');
+    if(empty($url) || empty($apikey))
+      throw new \Exception('Invalid client configuration. Missing Redmine URL or API key');
+    $this->say('Using Redmine: ' . $url);
+    return new NativeCurlClient($url, $apikey);
+  }
+
+  /**
+   * redmine:create-test-issue
+   *
+   * @throws \Exception
+   * @noinspection PhpUnused
+   */
+  public function redmineCreateTestIssue(): void {
+    $redmine = new RedmineAPI($this->createClient());
+    try {
+      $out = $redmine->createIssueFromYaml('templates/test.yml', $this->output);
+    } catch (\Redmine\Exception|\Throwable $e) {
+      $this->yell($e->getMessage());
+    }
+    $this->say('Created issue with ID: ' . $out->id);
+  }
+}
