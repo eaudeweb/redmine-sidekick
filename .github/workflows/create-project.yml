@@ -21,7 +21,7 @@ on:
 name: 'Create project skeleton'
 jobs:
   prepare:
-    name: 'Create release archive'
+    name: 'Create new project structure'
     runs-on: 'ubuntu-latest'
     steps:
       - name: 'Checkout source code'
@@ -32,11 +32,7 @@ jobs:
       - name: 'Install dependencies'
         run: >
           composer install --no-ansi --no-dev --no-interaction --no-progress --optimize-autoloader
-  create_project:
-    name: 'Initialise project'
-    runs-on: 'ubuntu-latest'
-    needs: prepare
-    steps:
+
       - name: 'Export Redmine API key to environment'
         run: echo "REDMINE_APIKEY=${{ inputs.redmine_api_key }}" >> $GITHUB_ENV
 
