@@ -1,0 +1,5 @@
+tracker_id: 5 # Feature(2), Task(5), Contract(11)
+subject: Project status reports
+description: |
+  Activity reports, timelines etc. provided internally or to the client
+parent_issue: 001--pm.yml

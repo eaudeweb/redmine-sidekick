@@ -30,7 +30,7 @@ class RoboFile extends Tasks
    * @throws \Exception
    * @noinspection PhpUnused
    */
-  public function redmineCreateTestIssue(): void {
+  public function redmineCreateTestIssue($redmineProjectId): void {
     $redmine = new RedmineAPI($this->createClient());
     try {
       $out = $redmine->createIssueFromYaml('templates/test.yml', $this->output);
@@ -38,5 +38,22 @@ class RoboFile extends Tasks
       $this->yell($e->getMessage());
     }
     $this->say('Created issue with ID: ' . $out->id);
+  }
+
+
+  /**
+   * Create hierarchy issues related to web design phase.
+   *
+   * @throws \Exception
+   * @noinspection PhpUnused
+   */
+  public function redmineCreateNewProject($redmineProjectId, $parentContractId = NULL): void {
+    $redmine = new RedmineAPI($this->createClient());
+    try {
+      $redmine->createProject($redmineProjectId, $this->output, $parentContractId);
+    } catch (\Redmine\Exception|\Throwable $e) {
+      $this->yell($e->getMessage());
+    }
+    $this->say('Done creating project structure.');
   }
 }

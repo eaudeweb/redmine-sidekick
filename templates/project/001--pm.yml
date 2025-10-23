@@ -1,0 +1,11 @@
+tracker_id: 2 # Feature(2), Task(5), Contract(11)
+subject: Project management
+description: |
+  This issue is the parent for all project management related activities (reports, resource management etc.)
+  
+  h2. Meeting time logging rules
+
+  # Specific Issue Meetings: If a meeting is about a specific issue with its own ticket, log all meeting time directly to that ticket.
+  Example: A meeting clarifying a customer-reported problem that has a dedicated ticket.
+  # General Meetings: For meetings that are not related to a specific issue (e.g., weekly meetings, daily meetings, status updates), log time to the general "Meetings" ticket.
+  *Note: When logging meeting time, specify the activity as either Internal Meeting (team/company organized) or Customer Meeting (with clients).

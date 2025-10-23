@@ -1,6 +1,4 @@
-project_id: php
 tracker_id: 5 # Feature(2), Task(5), Contract(11)
 subject: Web design
 description: |
   This feature covers all aspects of the project's 3-phase web design approach.
-parent_issue_id: 0
