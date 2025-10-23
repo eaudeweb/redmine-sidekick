@@ -39,4 +39,4 @@ jobs:
 
       - name: 'Create project issues'
         run: >
-          ./vendor/bin/robo redmine:create-new-project ${{ inputs.redmine_project_id }} ${{ inputs.redmine_parent_issue_id }}
+          ./vendor/bin/robo redmine:create-new-project ${{ inputs.redmine_url }} ${{ inputs.redmine_project_id }} ${{ inputs.redmine_parent_issue_id }}

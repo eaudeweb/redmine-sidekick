@@ -15,13 +15,12 @@ class RoboFile extends Tasks
   /**
    * @throws \Exception
    */
-  private function createClient(): NativeCurlClient {
-    $url = getenv('REDMINE_URL') ?: 'https://test.helpdesk.eaudeweb.ro';
+  private function createClient($redmineUrl): NativeCurlClient {
     $apikey = getenv('REDMINE_APIKEY') ?: trim(file_get_contents('redmine.key'));
-    if(empty($url) || empty($apikey))
+    if(empty($redmineUrl) || empty($apikey))
       throw new \Exception('Invalid client configuration. Missing Redmine URL or API key');
-    $this->say('Using Redmine: ' . $url);
-    return new NativeCurlClient($url, $apikey);
+    $this->say('Using Redmine: ' . $redmineUrl);
+    return new NativeCurlClient($redmineUrl, $apikey);
   }
 
   /**
@@ -47,13 +46,19 @@ class RoboFile extends Tasks
    * @throws \Exception
    * @noinspection PhpUnused
    */
-  public function redmineCreateNewProject($redmineProjectId, $parentContractId = NULL): void {
-    $redmine = new RedmineAPI($this->createClient());
+  public function redmineCreateNewProject($redmineUrl, $redmineProjectId, $parentContractId = NULL): void {
+    $client = $this->createClient($redmineUrl);
+    $redmine = new RedmineAPI($client);
     try {
       $redmine->createProject($redmineProjectId, $this->output, $parentContractId);
     } catch (\Redmine\Exception|\Throwable $e) {
       $this->yell($e->getMessage());
     }
-    $this->say('Done creating project structure.');
+    if($parentContractId) {
+      $url = $redmineUrl . '/issues/' . $parentContractId;
+    } else {
+      $url = $redmineUrl . '/projects/' . $redmineProjectId;
+    }
+    $this->say('Done creating project structure. Visit it at: ' . $url);
   }
 }
