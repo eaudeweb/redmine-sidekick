@@ -1,0 +1,36 @@
+on:
+  workflow_dispatch:
+    inputs:
+      redmine_url:
+        type: string
+        description: 'URL to Redmine instance'
+        required: true
+      api_key:
+        type: string
+        description: 'Your Redmine API token (from My account)'
+        required: true
+      project_id:
+        type: string
+        description: 'Redmine project ID'
+        required: true
+      parent_issue_id:
+        type: string
+        description: 'Attach to parent issue'
+        required: false
+
+name: 'Create project skeleton'
+jobs:
+  create_project:
+    name: 'Create release archive'
+    runs-on: 'ubuntu-latest'
+    steps:
+      - name: 'Checkout source code'
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - name: 'Install dependencies'
+        run: >
+          composer install --no-ansi --no-dev --no-interaction --no-progress --optimize-autoloader
+      - name: 'Create project issues'
+        run: >
+          ./vendor/bin/robo
