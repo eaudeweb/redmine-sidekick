@@ -1,0 +1,17 @@
+tracker_id: 5 # Feature(2), Task(5), Contract(11)
+subject: Project development
+description: |
+  Add here main features to be developed under the project. E.g:
+  1. Home page
+  2. News
+  3. Articles
+  4. People
+  
+  Each feature is atomic and captures the following (optional) activities:
+  1. Web/Design
+  2. Arhitecture
+  3. Documentation: Technical solution/specifications
+  4. Execution activities: back-end/front-end/system administration
+  5. User manual
+  6. Testing and acceptance testing
+  7. User training
