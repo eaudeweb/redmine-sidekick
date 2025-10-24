@@ -1,4 +1,4 @@
-tracker_id: 5 # Feature(2), Task(5), Contract(11)
+tracker_id: 2 # Feature(2), Task(5), Contract(11)
 subject: Project development
 description: |
   Add here main features to be developed under the project. E.g:
